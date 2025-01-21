@@ -1,5 +1,6 @@
 package pl.edu;
 
+import pl.edu.model.Game;
 import pl.edu.model.MenuManager;
 
 import java.awt.*;
@@ -23,15 +24,15 @@ public class GamePlay {
                     return;
                 }
                 case 1 -> {
-                    System.out.println("You picked option 1");
+                    Game game = new Game();
+                    game.newGame();
+
                 }
                 default -> {
                     System.out.println("Pick either 0 or 1!");
                 }
-
             }
         }
-
 
     }
 }
