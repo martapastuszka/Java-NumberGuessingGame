@@ -3,15 +3,13 @@ package pl.edu;
 import pl.edu.model.Game;
 import pl.edu.model.MenuManager;
 
-import java.awt.*;
-
 public class GamePlay {
 
     public void start() {
         System.out.println();
         System.out.println("Welcome to Number Guessing Game!");
         System.out.println("Computer picks a number range 0-10,");
-        System.out.println("Your task is guess which it picked. You have 3 attempts. Good luck!");
+        System.out.println("Your task is guess which it picked. There are 3 rounds, You have 3 attempts in each round. Good luck!");
 
         MenuManager menu = new MenuManager();
 

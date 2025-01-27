@@ -8,7 +8,7 @@ public class Computer {
     public int generateNumber(){
         Random random = new Random();
         int randomInt = random.nextInt(11);
-        System.out.println("Computer guess: " + randomInt);
+        System.out.println("[TEST]Computer guess: " + randomInt);
 
         return randomInt;
     }
