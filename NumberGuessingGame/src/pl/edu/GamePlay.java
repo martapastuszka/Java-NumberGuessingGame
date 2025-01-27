@@ -1,9 +1,15 @@
 package pl.edu;
 
-import pl.edu.model.Game;
-import pl.edu.model.MenuManager;
+import pl.edu.model.*;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class GamePlay {
+
+    private int roundNumber = 1;
+    private int numberOfAttempts = 3;
 
     public void start() {
         System.out.println();
@@ -12,7 +18,6 @@ public class GamePlay {
         System.out.println("Your task is guess which it picked. There are 3 rounds, You have 3 attempts in each round. Good luck!");
 
         MenuManager menu = new MenuManager();
-
         for (; ; ) {
             int o = menu.showMenu();
 
@@ -22,15 +27,64 @@ public class GamePlay {
                     return;
                 }
                 case 1 -> {
-                    Game game = new Game();
-                    game.newGame();
-
+                  newGame();
                 }
                 default -> {
                     System.out.println("Pick either 0 or 1!");
                 }
             }
         }
+    }
+
+    public void newGame(){
+        Computer comp = new Computer();
+        PlayerManager playerManager = new PlayerManager();
+        String name = playerManager.createPlayer();
+
+
+        System.out.println("Hello " + name + "!");
+        playerManager.playerInfo();
+
+        System.out.println("You have " + numberOfAttempts + " attempts left.");
+
+//        int compGuess;
+        int playerGuess;
+        int playerScore = playerManager.getPlayerScore();
+        int compGuess;
+
+        for (roundNumber = 1; roundNumber < 4; roundNumber++) {
+            System.out.println("Round number: " + roundNumber);
+            compGuess = comp.generateNumber();
+            numberOfAttempts = 3;
+            while (numberOfAttempts > 0 && numberOfAttempts <= 3) {
+                playerGuess = playerManager.setPlayerGuess();
+                if (compGuess == playerGuess) {
+                    System.out.println("You won!");
+                    playerScore++;
+                    System.out.println("Your score: " + playerScore + " points.");
+                    playerManager.setPlayerScore(playerScore);
+                    break;
+                } else {
+                    System.out.println("That's not this number.");
+                    --numberOfAttempts;
+                    System.out.println("You have " + numberOfAttempts + " attempts left.");
+                }
+            }
+            playerManager.playerInfo();
+            System.out.println("What do you want to do now?");
+        }
+
+//        try{
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
+//            for (Player player : playerManager.getPlayers()){
+//                writer.write("\nName: " + player.getName() + ", score: " + playerManager.getPlayerScore());
+//            }
+//            writer.close();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
 
     }
+
+
 }

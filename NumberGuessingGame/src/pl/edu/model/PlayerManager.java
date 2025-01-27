@@ -1,5 +1,8 @@
 package pl.edu.model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -38,5 +41,33 @@ public class PlayerManager {
 
     public void setPlayerScore(int playerScore) {
         this.playerScore = playerScore;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+//    public void savePlayers(List<Player> players, int playerScore){
+//        try{
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
+//            for (Player player : players){
+//                writer.write("\nName: " + player.getName() + ", score: " + playerScore);
+//            }
+//            writer.close();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void savePlayers(){
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
+            for (Player player : players){
+                writer.write("\nName: " + player.getName() + ", score: " + playerScore );
+            }
+            writer.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
