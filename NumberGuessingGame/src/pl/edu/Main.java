@@ -1,10 +1,10 @@
 package pl.edu;
 
+import pl.edu.model.GameManager;
+
 public class Main {
     public static void main(String[] args) {
-//        Game game = new Game();
-//        game.start();
-
-        new GamePlay().start();
+        GameManager gm = new GameManager();
+        gm.start();
     }
 }
