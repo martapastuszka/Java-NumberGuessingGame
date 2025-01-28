@@ -47,18 +47,6 @@ public class PlayerManager {
         return players;
     }
 
-//    public void savePlayers(List<Player> players, int playerScore){
-//        try{
-//            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
-//            for (Player player : players){
-//                writer.write("\nName: " + player.getName() + ", score: " + playerScore);
-//            }
-//            writer.close();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
-
     public void savePlayers(){
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));

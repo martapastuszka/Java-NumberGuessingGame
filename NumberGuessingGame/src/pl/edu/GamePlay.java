@@ -11,6 +11,8 @@ public class GamePlay {
     private int roundNumber = 1;
     private int numberOfAttempts = 3;
 
+    PlayerManager playerManager = new PlayerManager();
+
     public void start() {
         System.out.println();
         System.out.println("Welcome to Number Guessing Game!");
@@ -18,6 +20,8 @@ public class GamePlay {
         System.out.println("Your task is guess which it picked. There are 3 rounds, You have 3 attempts in each round. Good luck!");
 
         MenuManager menu = new MenuManager();
+//        PlayerManager playerManager = new PlayerManager();
+
         for (; ; ) {
             int o = menu.showMenu();
 
@@ -28,6 +32,7 @@ public class GamePlay {
                 }
                 case 1 -> {
                   newGame();
+                  saveResults();
                 }
                 default -> {
                     System.out.println("Pick either 0 or 1!");
@@ -38,16 +43,13 @@ public class GamePlay {
 
     public void newGame(){
         Computer comp = new Computer();
-        PlayerManager playerManager = new PlayerManager();
         String name = playerManager.createPlayer();
-
 
         System.out.println("Hello " + name + "!");
         playerManager.playerInfo();
 
         System.out.println("You have " + numberOfAttempts + " attempts left.");
 
-//        int compGuess;
         int playerGuess;
         int playerScore = playerManager.getPlayerScore();
         int compGuess;
@@ -73,18 +75,17 @@ public class GamePlay {
             playerManager.playerInfo();
             System.out.println("What do you want to do now?");
         }
-
-//        try{
-//            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
-//            for (Player player : playerManager.getPlayers()){
-//                writer.write("\nName: " + player.getName() + ", score: " + playerManager.getPlayerScore());
-//            }
-//            writer.close();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-
     }
 
-
+    public void saveResults(){
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
+            for (Player player : playerManager.getPlayers()){
+                writer.write("\nName: " + player.getName() + ", score: " + playerManager.getPlayerScore());
+            }
+            writer.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
