@@ -4,9 +4,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.Map;
+
+
+// wczytywać z pliku 5 najlepszych graczy
+// number of attempts - nie może się zmniejszać gdy podamy liczbę inną niz z zadanego przedziału
+// sprawdzić słowniki i tablice asocjacyjne
 
 public class GameManager {
     private List<Player> players = new ArrayList<>();
@@ -32,7 +37,7 @@ public class GameManager {
                     Game game = new Game();
                     Player player = game.newGame();
                     players.add(player);
-                    playerInfo();
+//                    playerInfo();
                     savePlayers();
                 }
                 default -> {
@@ -48,15 +53,36 @@ public class GameManager {
         }
     }
 
-    public void savePlayers(){
-        try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
-            for (Player player : players){
-                writer.write("\nName: " + player.getName() + ", score: " + player.getScore());
+//    public void savePlayers(){
+//        try{
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
+//            for (Player player : players){
+//                writer.write("\nName: " + player.getName() + ", score: " + player.getScore());
+//            }
+//            writer.close();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+//}
+
+    public void savePlayers() {
+        Map<String, Integer> map = new HashMap<>();
+
+        for(Player player : players){
+            String name = player.getName();
+            int score = player.getScore();
+            // sprawdzam czy klucz juz istnieje
+            if(map.containsKey(name)){
+                //dodaję nową wartość do istniejącej
+                map.put(name, map.get(name) + score);
+            }else{
+                map.put(player.getName(), player.getScore());
             }
-            writer.close();
-        }catch (IOException e){
-            e.printStackTrace();
+        }
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(map.entrySet());
+        for (Map.Entry<String, Integer> entry : entryList) {
+            System.out.println("Klucz: " + entry.getKey() + " Wartość: " + entry.getValue());
         }
     }
 }
