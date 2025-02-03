@@ -91,6 +91,34 @@ public class GameManager {
         return entryList;
     }
 
+//    public List<Map.Entry<String, Integer>> savePlayers() {
+//        Map<String, Integer> map = new HashMap<>();
+//
+//        for (Player player : players) {
+//            String name = player.getName();
+//            int score = player.getScore();
+//            // sprawdzam czy klucz juz istnieje
+//            if (map.containsKey(name)) {
+//                //dodaję nową wartość do istniejącej
+//                map.put(name, map.get(name) + score);
+//            } else {
+//                map.put(player.getName(), player.getScore());
+//            }
+//        }
+//        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(map.entrySet());
+//        entryList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+//        try {
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("tableResults.txt"));
+//            for (Map.Entry<String, Integer> entry : entryList) {
+//                writer.write("\nName: " + entry.getKey() + ", score: " + entry.getValue());
+//            }
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return entryList;
+//    }
+
     public void showBestPlayers(){
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader("tableResults.txt"))){
